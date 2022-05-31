@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5 mt-5">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">{{titre}}</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item mb-1">
+          <div >
+            <button class="btn btn-outline-warning"><i class="fa fa-star-half-empty" aria-hidden="true"></i> Favoris</button>
+            <button class="btn btn-outline-danger mx-2"><i class="fa fa-lock" aria-hidden="true"></i> Privé</button>
+          </div>
+
+        </li>
+        <li class="nav-item">
+          <div *ngIf="_defaultUser.role.libelle === 'SCRUMP MASTER'">
+            <a class="btn btn-light btn-outline-secondary"
+            [routerLink]="['/create', 0]">
+            Inviter Utilisateur
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            </a>
+            <a class="btn btn-light btn-outline-success ms-2"
+            [routerLink]="['/create', 0]">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+            Ajouter un nouvelle Tâche
+            </a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user" aria-hidden="true"></i></a>
+          <div class="dropdown-menu" aria-labelledby="dropdownId">
+            <div class="card text-white bg-dark">
+              <img class="card-img-top" src="{{_defaultUser.image}}" alt="#">
+              <div class="card-body">
+                <h5 class="card-title text-success">{{_defaultUser.prenom}} {{_defaultUser.nom}}</h5>
+                <p class="card-text">Email: {{_defaultUser.email}}</p>
+              </div>
+            </div>
+            <!-- <button class="dropdown-item btn-outline-secondary" *ngFor="let u of _listUsers" (click)="switchUser(u.id)"> {{u.prenom}} {{u.nom}}</button> -->
+              <a class="dropdown-item text-danger" href="#">Se Déconnecter</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
