@@ -1,0 +1,65 @@
+<div class="card">
+  <div class="card-header">
+    <h1>Enregistrement Classe</h1>
+  </div>
+  <div class="card-body">
+    <!--Form with Reactive start-->
+    <form (ngSubmit)="student.id === 0 ? saveStudent() : editStudent(student.id)" [formGroup]="saveForm" ovalidate>
+      <div class="form-group">
+        <label For="nom" class="col-sm-2 col-form-label">Nom: </label>
+        <div class="col-sm-12">
+          <input type="text" placeholder="Nom du l'éléve" class="form-control"
+          formControlName="nom"
+          [ngClass]="{'is-invalid': saveForm.get('nom')?.touched && !saveForm.get('nom')?.valid}"/>
+          <div class="invalid-feedback">
+            <span *ngIf="saveForm.get('nom')?.errors?.['required']">
+              Nom Obligatoire
+            </span>
+            <span *ngIf="saveForm.get('nom')?.errors?.['minlength']">
+              Minimum 5 caractéres
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label For="prenom" class="col-sm-2 col-form-label">Prénom: </label>
+        <div class="col-sm-12">
+          <input type="text" placeholder="Prénom du l'éléve" class="form-control"
+          formControlName="prenom"
+          [ngClass]="{'is-invalid': saveForm.get('prenom')?.touched && !saveForm.get('prenom')?.valid}"/>
+          <div class="invalid-feedback">
+            <span *ngIf="saveForm.get('prenom')?.errors?.['required']">
+              Prénom Obligatoire
+            </span>
+            <span *ngIf="saveForm.get('prenom')?.errors?.['minlength']">
+              Minimum 5 caractéres
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label For="classe" class="col-sm-2 col-form-label">Classe: </label>
+        <div class="col-sm-12">
+          <select formControlName="classe" class="form-control"
+          [ngClass]="{'is-invalid': saveForm.get('classe')?.touched && !saveForm.get('classe')?.valid}">
+          <option disabled>Selectionner une Classe</option>
+            <option *ngFor="let cl of listCl" [value]="cl.id">{{cl.libelle}}</option>
+          </select>
+          <div class="invalid-feedback">
+            <span *ngIf="saveForm.get('classe')?.errors">
+              Classe de l'éléve Obligatoire
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group mt-2">
+        <button type="submit" class="btn btn-info me-2" [disabled]="!saveForm.valid">Enregistrer</button>
+        <button type="button" class="btn btn-danger ml-4" (click)="goBack()">Annuler</button>
+      </div>
+    </form>
+    <!--Form with Reactive End-->
+  </div>
+  <div class="card-footer text-muted">
+    Footer
+  </div>
+</div>

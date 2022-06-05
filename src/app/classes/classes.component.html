@@ -1,1 +1,67 @@
-<p>classes works!</p>
+<div class="card">
+  <div class="card-header bg-dark">
+    <div class="d-flex justify-content-between">
+      <h5 class="text-light"> Liste des Classes</h5>
+      <a routerLink="/classes/create" class="btn btn-outline-info">Nouvelle Classe</a>
+    </div>
+  </div>
+  <div class="card-body">
+    <form>
+      <div class="row mx-5">
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="searchLibelle" class="col-form-label">Recherche</label>
+            <input type="text" name="searchLibelle" id="searchLibelle" class="form-control" placeholder="Libelle" [(ngModel)]="searchLibelle" (keyup)="filterClasses()">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="searchDateMin" class="col-form-label">Créée après</label>
+            <input type="datetime-local" name="searchDateMin" id="searchDateMin" class="form-control" placeholder="Créée aprés le" [(ngModel)]="searchDateMin" (change)="filterClasses()" [max]="searchDateMax">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="searchDateMax" class="col-form-label">Créée avant</label>
+            <input type="datetime-local" name="searchDateMax" id="searchDateMax" class="form-control" placeholder="Créée avant le" [(ngModel)]="searchDateMax" (change)="filterClasses()" [min]="searchDateMin">
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="table-responsive">
+      <table class="table table-light">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Libelle</th>
+            <th>Créée le</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cl of listCl">
+            <td scope="row" class="text-info">{{cl.id}}</td>
+            <td>{{cl.libelle}}</td>
+            <td>{{cl.createdAt | date:"short":"":"fr"}}</td>
+            <td>
+              <a class="btn btn-outline-secondary  me-2"
+              [routerLink]="['/classes/edit', cl.id]">
+                <i class="fa fa-eye"></i>
+              </a>
+              <a class="btn btn-outline-info me-2 mt-1"
+              [routerLink]="['/classes/edit', cl.id]">
+                <i class="fa fa-pencil"></i>
+              </a>
+              <a class="btn btn-outline-danger mt-1"
+              data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="deleteObject = cl">
+                <i class="fa fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+<app-modal-delete [element]="deleteObject" [list]="listCl"></app-modal-delete>

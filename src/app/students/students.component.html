@@ -1,0 +1,74 @@
+<div class="card">
+  <div class="card-header bg-dark">
+    <div class="d-flex justify-content-between">
+      <h5 class="text-light"> Liste des Eleves</h5>
+      <a routerLink="/students/create" class="btn btn-outline-info">Nouveau Eleve</a>
+    </div>
+  </div>
+  <div class="card-body">
+    <form>
+      <div class="row mx-5">
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="searchNom" class="col-form-label">Nom</label>
+            <input type="text" name="searchNom" id="searchNom" class="form-control" placeholder="Nom" [(ngModel)]="searchNom" (keyup)="filterStudents()">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="searchPrenom" class="col-form-label">Préom</label>
+            <input type="text" name="searchPrenom" id="searchPrenom" class="form-control" placeholder="Prénom" [(ngModel)]="searchPrenom" (keyup)="filterStudents()">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="searchClasse" class="col-form-label">Classe</label>
+            <select class="form-control" name="searchClasse" id="searchClasse" [(ngModel)]="searchClasse" (change)="filterStudents()">
+              <option value="" selected value="0">Toutes les classes</option>
+              <option *ngFor="let cl of listCl" [value]="cl.id">{{cl.libelle}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="table-responsive">
+      <table class="table table-light">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Classe</th>
+            <th>Créée le</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let st of listSt">
+            <td scope="row" class="text-info">{{st.id}}</td>
+            <td>{{st.nom}}</td>
+            <td>{{st.prenom}}</td>
+            <td>{{st.classe.libelle}}</td>
+            <td>{{st.createdAt | date:"short":"":"fr"}}</td>
+            <td>
+              <a class="btn btn-outline-secondary  me-2"
+              [routerLink]="['/students/edit', st.id]">
+                <i class="fa fa-eye"></i>
+              </a>
+              <a class="btn btn-outline-info me-2 mt-1"
+              [routerLink]="['/students/edit', st.id]">
+                <i class="fa fa-pencil"></i>
+              </a>
+              <a class="btn btn-outline-danger mt-1"
+              data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="deleteObject = st">
+                <i class="fa fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+<app-modal-delete [element]="deleteObject" [list]="listSt"></app-modal-delete>

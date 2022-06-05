@@ -5,18 +5,37 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopNavBarComponent } from './top-nav-bar/top-nav-bar.component';
 import { ClassesComponent } from './classes/classes.component';
+import { HomeContentComponent } from './home-content/home-content.component';
+import { StudentsComponent } from './students/students.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { CreateClasseComponent } from './classes/create-classe/create-classe.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ModalDeleteComponent } from './modal-delete/modal-delete.component';
+import { CreateStudentComponent } from './students/create-student/create-student.component';
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
     AppComponent,
     TopNavBarComponent,
-    ClassesComponent
+    ClassesComponent,
+    HomeContentComponent,
+    StudentsComponent,
+    CreateClasseComponent,
+    NotFoundComponent,
+    ModalDeleteComponent,
+    CreateStudentComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

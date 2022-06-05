@@ -9,24 +9,23 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
-        <li class="nav-item mb-1">
-          <div >
-            <button class="btn btn-outline-warning"><i class="fa fa-star-half-empty" aria-hidden="true"></i> Favoris</button>
-            <button class="btn btn-outline-danger mx-2"><i class="fa fa-lock" aria-hidden="true"></i> Privé</button>
-          </div>
-
+        <li class="nav-item me-3">
+          <a class="btn btn-outline-warning"><i class="fa fa-star-half-empty" aria-hidden="true"></i> Favoris</a>
+        </li>
+        <li class="nav-item me-3">
+          <a class="btn btn-outline-danger"><i class="fa fa-lock" aria-hidden="true"></i> Privé</a>
         </li>
         <li class="nav-item">
-          <div *ngIf="_defaultUser.role.libelle === 'SCRUMP MASTER'">
+          <div>
             <a class="btn btn-light btn-outline-secondary"
-            [routerLink]="['/create', 0]">
-            Inviter Utilisateur
-            <i class="fa fa-user-plus" aria-hidden="true"></i>
+            [routerLink]="['/classes']">
+            Classes
+            <i class="fa fa-graduation-cap" aria-hidden="true"></i>
             </a>
             <a class="btn btn-light btn-outline-success ms-2"
-            [routerLink]="['/create', 0]">
-            <i class="fa fa-tasks" aria-hidden="true"></i>
-            Ajouter un nouvelle Tâche
+            [routerLink]="['/students']">
+            <i class="fa fa-user-md" aria-hidden="true"></i>
+            Eleves
             </a>
           </div>
         </li>
