@@ -25,7 +25,7 @@
             <label for="searchClasse" class="col-form-label">Classe</label>
             <select class="form-control" name="searchClasse" id="searchClasse" [(ngModel)]="searchClasse" (change)="filterStudents()">
               <option value="" selected value="0">Toutes les classes</option>
-              <option *ngFor="let cl of listCl" [value]="cl.id">{{cl.libelle}}</option>
+              <!-- <option *ngFor="let cl of listCl" [value]="cl.id">{{cl.libelle}}</option> -->
             </select>
           </div>
         </div>

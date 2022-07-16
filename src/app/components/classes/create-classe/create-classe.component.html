@@ -4,7 +4,7 @@
   </div>
   <div class="card-body">
     <!--Form with Reactive start-->
-    <form (ngSubmit)="classe.id === 0 ? saveClasse() : editClasse(classe.id)" [formGroup]="saveForm" ovalidate>
+    <form (ngSubmit)="!classe!.id ? saveClasse() : editClasse()" [formGroup]="saveForm!" ovalidate>
       <div class="row g-3 align-items-center">
         <div class="col-auto">
           <label for="libelle" class="col-form-label">Libelle</label>
@@ -12,18 +12,18 @@
         <input type="hidden" name="id" id="id" class="form-control" placeholder="id" formControlName="id"/>
         <div class="col-auto col-md-6">
           <input type="text" name="libelle" id="libelle" class="form-control" placeholder="Libelle" formControlName="libelle"
-          [ngClass]="{'is-invalid': saveForm.get('libelle')?.touched && !saveForm.get('libelle')?.valid}"/>
+          [ngClass]="{'is-invalid': saveForm!.get('libelle')?.touched && !saveForm!.get('libelle')?.valid}"/>
           <div class="invalid-feedback">
-            <span *ngIf="saveForm.get('libelle')?.errors?.['required']">
+            <span *ngIf="saveForm!.get('libelle')?.errors?.['required']">
               Libelle Obligatoire
             </span>
-            <span *ngIf="saveForm.get('libelle')?.errors?.['minlength']">
+            <span *ngIf="saveForm!.get('libelle')?.errors?.['minlength']">
               Minimum 5 caractéres
             </span>
           </div>
       </div>
       <div class="col-auto">
-        <button type="submit" class="btn btn-info" [disabled]="!saveForm.valid">Enregistrer</button>
+        <button type="submit" class="btn btn-info" [disabled]="!saveForm!.valid">Enregistrer</button>
       </div>
       <div class="col-auto">
         <button type="button" (click)="goBack()" class="btn btn-danger">Annuler</button>

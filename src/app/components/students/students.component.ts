@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { classes } from '../classe';
-import { students } from '../student';
+import { Student } from 'src/app/models/student';
+import { StudentsService } from 'src/app/services/students/students.service';
 
 @Component({
   selector: 'app-students',
@@ -8,19 +8,31 @@ import { students } from '../student';
   styleUrls: ['./students.component.scss']
 })
 export class StudentsComponent implements OnInit {
-  listSt = students;
+  listSt!: Student[];
   deleteObject:any;
   searchNom = "";
   searchPrenom = "";
-  searchClasse = 0;
-  listCl = classes;
-  constructor() { }
+  searchClasse = "";
+  // listCl = classes;
+  constructor(
+    private studentService: StudentsService
+  ) { }
 
   ngOnInit(): void {
   }
-
+  private loadStudents(){
+    this.studentService.getAll()
+      .subscribe(
+        data => {
+          this.listSt = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
   filterStudents(){
-    this.listSt = students
+    this.loadStudents();
     if(this.searchNom === "" && this.searchPrenom === "" && Number(this.searchClasse) === 0){
       return;
     }
@@ -29,6 +41,6 @@ export class StudentsComponent implements OnInit {
     if(this.searchPrenom !== "")
       this.listSt = this.listSt.filter((t) => t.prenom.toUpperCase().includes(this.searchPrenom.toUpperCase()));
     if(this.searchClasse)
-      this.listSt = this.listSt.filter((t) => t.classe.id == this.searchClasse);
+      this.listSt = this.listSt.filter((t) => t.classe.id === this.searchClasse);
   }
 }

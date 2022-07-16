@@ -4,7 +4,7 @@
   </div>
   <div class="card-body">
     <!--Form with Reactive start-->
-    <form (ngSubmit)="student.id === 0 ? saveStudent() : editStudent(student.id)" [formGroup]="saveForm" ovalidate>
+    <form (ngSubmit)="student.id ? saveStudent() : editStudent(student.id)" [formGroup]="saveForm" ovalidate>
       <div class="form-group">
         <label For="nom" class="col-sm-2 col-form-label">Nom: </label>
         <div class="col-sm-12">
