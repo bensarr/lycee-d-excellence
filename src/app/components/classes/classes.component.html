@@ -35,21 +35,23 @@
             <th>ID</th>
             <th>Libelle</th>
             <th>Créée le</th>
+            <th>Modifiée le</th>
             <th>Options</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let cl of listCl">
-            <td scope="row" class="text-info">{{cl.id}}</td>
+            <td scope="row" class="text-info">{{cl._id}}</td>
             <td>{{cl.libelle}}</td>
             <td>{{cl.createdAt | date:"short":"":"fr"}}</td>
+            <td>{{cl.updatedAt | date:"short":"":"fr"}}</td>
             <td>
               <a class="btn btn-outline-secondary  me-2"
-              [routerLink]="['/classes/edit', cl.id]">
+              [routerLink]="['/classes/edit', cl._id]">
                 <i class="fa fa-eye"></i>
               </a>
               <a class="btn btn-outline-info me-2 mt-1"
-              [routerLink]="['/classes/edit', cl.id]">
+              [routerLink]="['/classes/edit', cl._id]">
                 <i class="fa fa-pencil"></i>
               </a>
               <a class="btn btn-outline-danger mt-1"
@@ -64,4 +66,20 @@
 
   </div>
 </div>
-<app-modal-delete [element]="deleteObject" [list]="listCl"></app-modal-delete>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Suppression d' Element</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Êtes vous sûr de vouloir supprimer cet element?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="delete()">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>

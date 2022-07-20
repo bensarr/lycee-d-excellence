@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class StudentsService {
-  private baseUrl = `${environment.apiUrl}categories`;
+  private baseUrl = `${environment.apiUrl}eleves`;
   constructor(private http: HttpClient) { }
   getAll(): Observable<Student[]>{
     return this.http.get<Student[]>(this.baseUrl);

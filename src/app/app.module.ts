@@ -12,7 +12,6 @@ import localeFr from '@angular/common/locales/fr';
 import { CreateClasseComponent } from './components/classes/create-classe/create-classe.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { ModalDeleteComponent } from './components/modal-delete/modal-delete.component';
 import { CreateStudentComponent } from './components/students/create-student/create-student.component';
 registerLocaleData(localeFr);
 
@@ -25,7 +24,6 @@ registerLocaleData(localeFr);
     StudentsComponent,
     CreateClasseComponent,
     NotFoundComponent,
-    ModalDeleteComponent,
     CreateStudentComponent
   ],
   imports: [

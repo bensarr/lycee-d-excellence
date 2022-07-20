@@ -4,11 +4,11 @@
   </div>
   <div class="card-body">
     <!--Form with Reactive start-->
-    <form (ngSubmit)="student.id ? saveStudent() : editStudent(student.id)" [formGroup]="saveForm" ovalidate>
+    <form (ngSubmit)="!student._id ? saveStudent() : editStudent()" [formGroup]="saveForm">
       <div class="form-group">
         <label For="nom" class="col-sm-2 col-form-label">Nom: </label>
         <div class="col-sm-12">
-          <input type="text" placeholder="Nom du l'éléve" class="form-control"
+          <input type="text" id="nom" placeholder="Nom du l'éléve" class="form-control"
           formControlName="nom"
           [ngClass]="{'is-invalid': saveForm.get('nom')?.touched && !saveForm.get('nom')?.valid}"/>
           <div class="invalid-feedback">
@@ -24,7 +24,7 @@
       <div class="form-group">
         <label For="prenom" class="col-sm-2 col-form-label">Prénom: </label>
         <div class="col-sm-12">
-          <input type="text" placeholder="Prénom du l'éléve" class="form-control"
+          <input type="text" id="prenom" placeholder="Prénom du l'éléve" class="form-control"
           formControlName="prenom"
           [ngClass]="{'is-invalid': saveForm.get('prenom')?.touched && !saveForm.get('prenom')?.valid}"/>
           <div class="invalid-feedback">
@@ -40,10 +40,10 @@
       <div class="form-group">
         <label For="classe" class="col-sm-2 col-form-label">Classe: </label>
         <div class="col-sm-12">
-          <select formControlName="classe" class="form-control"
+          <select formControlName="classe" class="form-control" id="classe"
           [ngClass]="{'is-invalid': saveForm.get('classe')?.touched && !saveForm.get('classe')?.valid}">
           <option disabled>Selectionner une Classe</option>
-            <option *ngFor="let cl of listCl" [value]="cl.id">{{cl.libelle}}</option>
+            <option *ngFor="let cl of listCl" [value]="cl._id">{{cl.libelle}}</option>
           </select>
           <div class="invalid-feedback">
             <span *ngIf="saveForm.get('classe')?.errors">

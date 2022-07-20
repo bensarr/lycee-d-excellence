@@ -24,8 +24,8 @@
           <div class="mb-3">
             <label for="searchClasse" class="col-form-label">Classe</label>
             <select class="form-control" name="searchClasse" id="searchClasse" [(ngModel)]="searchClasse" (change)="filterStudents()">
-              <option value="" selected value="0">Toutes les classes</option>
-              <!-- <option *ngFor="let cl of listCl" [value]="cl.id">{{cl.libelle}}</option> -->
+              <option selected value="">Toutes les classes</option>
+              <option *ngFor="let cl of listCl" [value]="cl._id">{{cl.libelle}}</option>
             </select>
           </div>
         </div>
@@ -39,24 +39,26 @@
             <th>Nom</th>
             <th>Prénom</th>
             <th>Classe</th>
-            <th>Créée le</th>
+            <th>Créé le</th>
+            <th>Modifié le</th>
             <th>Options</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let st of listSt">
-            <td scope="row" class="text-info">{{st.id}}</td>
+            <td scope="row" class="text-info">{{st._id}}</td>
             <td>{{st.nom}}</td>
             <td>{{st.prenom}}</td>
-            <td>{{st.classe.libelle}}</td>
+            <td>{{st.classe!.libelle}}</td>
             <td>{{st.createdAt | date:"short":"":"fr"}}</td>
+            <td>{{st.updatedAt | date:"short":"":"fr"}}</td>
             <td>
               <a class="btn btn-outline-secondary  me-2"
-              [routerLink]="['/students/edit', st.id]">
+              [routerLink]="['/students/edit', st._id]">
                 <i class="fa fa-eye"></i>
               </a>
               <a class="btn btn-outline-info me-2 mt-1"
-              [routerLink]="['/students/edit', st.id]">
+              [routerLink]="['/students/edit', st._id]">
                 <i class="fa fa-pencil"></i>
               </a>
               <a class="btn btn-outline-danger mt-1"
@@ -71,4 +73,20 @@
 
   </div>
 </div>
-<app-modal-delete [element]="deleteObject" [list]="listSt"></app-modal-delete>
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Suppression d' Element</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Êtes vous sûr de vouloir supprimer cet element?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="delete()">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>

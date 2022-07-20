@@ -26,40 +26,38 @@ export class CreateClasseComponent implements OnInit {
     this.routeParams =this.route.snapshot.paramMap;
     this.id = this.routeParams.get('id');
     if(this.id)
-      this.loadOneClasse(this.id!);
+      this.loadOneClasse();
     else
       this.classe = new Classe();
     this.saveForm = this.fb.group({
-      id: [
-        this.classe!.id
-      ],
       libelle: [
-        this.classe!.libelle,
+        '',
         [Validators.required, Validators.minLength(5)],
       ],
     });
   }
   saveClasse(){
+    this.classe = Object.assign(this.saveForm!.value);
     this.classeService.create(this.classe!)
     .subscribe( data => {
-      console.log(data);
       this.goBack();
     },
         error => console.log(error));
   }
-  loadOneClasse(id: string): void {
-    this.classeService.getById(id)
+  loadOneClasse(): void {
+    this.classeService.getById(this.id!)
       .subscribe(
         data => {
           this.classe = data;
-          console.log(data);
+          this.saveForm!.get('libelle')!.setValue(this.classe!.libelle)
         },
         error => {
           console.log(error);
         });
   }
   editClasse(){
-    this.classeService.update(this.classe!.id!, this.classe!)
+    this.classe = Object.assign(this.saveForm!.value);
+    this.classeService.update(this.id!, this.classe!)
       .subscribe(
         response => {
           console.log(response);
