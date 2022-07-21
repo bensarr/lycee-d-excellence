@@ -6,6 +6,12 @@ Le project a été généré avec [Angular CLI](https://github.com/angular/angul
 
 ### * ng
 
-## Development server
+## Lancer l'application
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+1- Cloner le projet
+
+2- Run `npm install`
+
+3- Run `ng serve` pour lancer l'application. Se rendre sur l'url `http://localhost:4200/` sur un navigateur.
+
+4- Lancer le server backend https://github.com/bensarr/lycee-d-excellence-back-end
