@@ -74,7 +74,7 @@ export class CreateStudentComponent implements OnInit {
               this.student = data;
               this.saveForm!.get('nom')!.setValue(this.student!.nom);
               this.saveForm!.get('prenom')!.setValue(this.student!.prenom);
-              this.saveForm!.get('classe')!.setValue(this.student!.classe!);
+              this.saveForm!.get('classe')!.setValue(this.student!.classe!._id!);
             },
             error => {
               console.log(error);
